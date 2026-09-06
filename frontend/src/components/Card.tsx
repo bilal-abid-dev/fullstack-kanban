@@ -3,13 +3,17 @@
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import type { Card as CardType } from '@/types/database';
+import { useCards } from '@/hooks/useBoard';
 
 interface CardProps {
   card: CardType;
-  onDelete: (id: string) => Promise<void>;
+  onDelete?: (id: string) => Promise<void>;
+  columnId?: string;
 }
 
 export function Card({ card, onDelete }: CardProps) {
+  const { deleteCard } = useCards();
+  const handleDeleteCard = onDelete ?? deleteCard;
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: card.id });
 
   const style = {
@@ -21,7 +25,7 @@ export function Card({ card, onDelete }: CardProps) {
   const handleDelete = async (e: React.MouseEvent) => {
     e.stopPropagation();
     if (confirm('Delete this card?')) {
-      await onDelete(card.id);
+      await handleDeleteCard(card.id);
     }
   };
 

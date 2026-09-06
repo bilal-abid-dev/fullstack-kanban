@@ -55,8 +55,13 @@ export function useBoard() {
 }
 
 export function useColumns() {
-  const renameColumn = useCallback(async (_columnId: string, _newName: string) => {}, []);
-  const reorderColumns = useCallback(async (_columnIds: string[]) => {}, []);
+  const renameColumn = useCallback(async (columnId: string, newName: string) => {
+    void columnId;
+    void newName;
+  }, []);
+  const reorderColumns = useCallback(async (columnIds: string[]) => {
+    void columnIds;
+  }, []);
 
   return { renameColumn, reorderColumns };
 }
@@ -71,9 +76,18 @@ export function useCards() {
     created_at: new Date().toISOString(),
   }), []);
 
-  const deleteCard = useCallback(async (_cardId: string) => {}, []);
-  const moveCard = useCallback(async (_cardId: string, _newColumnId: string, _newPosition: number) => {}, []);
-  const reorderCards = useCallback(async (_cardIds: string[], _columnId: string) => {}, []);
+  const deleteCard = useCallback(async (cardId: string) => {
+    void cardId;
+  }, []);
+  const moveCard = useCallback(async (cardId: string, newColumnId: string, newPosition: number) => {
+    void cardId;
+    void newColumnId;
+    void newPosition;
+  }, []);
+  const reorderCards = useCallback(async (cardIds: string[], columnId: string) => {
+    void cardIds;
+    void columnId;
+  }, []);
 
   return { createCard, deleteCard, moveCard, reorderCards };
 }
